@@ -15,7 +15,7 @@ pipeline {
                     sh "docker push ${DOCKER_IMAGE}"
                 }
             }
-        }k
+        }
         stage('Kubernetes') {
             steps {
                 script {
