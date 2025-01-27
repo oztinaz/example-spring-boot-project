@@ -15,10 +15,13 @@ pipeline {
                     sh "docker push ${DOCKER_IMAGE}"
                 }
             }
-        }
+        }k
         stage('Kubernetes') {
             steps {
                 script {
+                    withCredentials([usernamePassword(credentialsId: 'f3ed1fcc-f6a0-4ac6-9166-97cb3613b801', passwordVariable: 'password', usernameVariable: 'username')]) {
+                        sh "kubectl auth --username $username --password $password"
+                    }
                     sh "kubectl apply -f deployment.yaml"
                     sh "minikube service demo1"
                 }
